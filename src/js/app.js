@@ -142,7 +142,7 @@ function drawPattern(canvas,n){
       console.log(n[i][j], i * istep + 10, j * jstep)      
       layout.push({
         pattern: n[i][j],
-        x: i * istep + 10,
+        x: i * istep,
         y: j * jstep
       })
       // ctx.strokeRect(0, 0, 10, 20)      
@@ -255,15 +255,15 @@ function moveWest() {
   console.log('west', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
-  console.log(position)
-  console.log(findFromArray(position.x,position.y))
+  console.log('position before',position.x, position.y)
+  // console.log(findFromArray(position.x,position.y))
   pointer(position.x-=15,position.y)
   // console.log(previousPostiton.x,position.x)
   
   if (position.x == 255 && position.y == 30){
     alert("gotcha")
   }
-  console.log('position',position)
+  console.log('position after',position)
 
 
 }
