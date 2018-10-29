@@ -139,7 +139,7 @@ function drawPattern(canvas,n){
       
       // ctx.fillText(o += 1, j * jstep , i * istep + 10 , 10, 20);
       ctx.fillText(n[i][j], j * jstep, i * istep + 10, 10, 20);      
-      console.log(n[i][j], i * istep + 10, j * jstep)      
+      // console.log(n[i][j], i * istep + 10, j * jstep)      
       layout.push({
         pattern: n[i][j],
         x: i * istep,
@@ -148,7 +148,7 @@ function drawPattern(canvas,n){
       // ctx.strokeRect(0, 0, 10, 20)      
       // console.log(pattern[0].length,pattern.length)
       if(j == n[i].length - 1){
-        console.log("array")
+        // console.log("array")
         continue
       }
 
@@ -189,7 +189,7 @@ function drawBoard(can, nRow, nCol,pattern) {
   console.log(pattern)
   for (var i = 0,l = 0; i < nRow, l < pattern.length; ++i,l++) {
     for (var j = 0,m = 0, col = nCol / 2; j < col,m < pattern[i].length; ++j,m++) {
-      console.log(pattern[i][j])      
+      // console.log(pattern[i][j])      
       // ctx.fillRect(2 * j * w + (i % 2 ? 0 : w), i * h, w, h);
       ctx.fillText(pattern[l][m], j * w , i * h);
     }
@@ -230,12 +230,11 @@ function pointer(x,y) {
 }
 
 function findFromArray(x,y) {
-  layout.map( (object,index) => {
-    if( (object.x == x) && (object.y == y ) ){
-      debugger
-      return object
-    }
-  })
+  for (var i = 0; i < layout.length; i++) {
+    if ((layout[i].x == x) && (layout[i].y == y ) ){
+        return layout[i]
+      }
+  }
 }
 
 window.addEventListener("keydown", function (e) {
@@ -252,18 +251,23 @@ window.addEventListener("keydown", function (e) {
 });
 
 function moveWest() {
-  console.log('west', layout)
+  // console.log('west', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
-  console.log('position before',position.x, position.y)
-  // console.log(findFromArray(position.x,position.y))
-  pointer(position.x-=15,position.y)
+  // console.log('position before',position.x, position.y)
+  console.log(findFromArray(position.y,position.x))
+  if (findFromArray(position.y, position.x - 15) && findFromArray(position.y, position.x - 15).pattern !== 0){
+    pointer(position.x -= 15, position.y)
+  }else{
+    console.log('findFromArray pattern',findFromArray(position.y, position.x).pattern)
+  }
+
   // console.log(previousPostiton.x,position.x)
   
   if (position.x == 255 && position.y == 30){
     alert("gotcha")
   }
-  console.log('position after',position)
+  console.log('position',position)
 
 
 }
@@ -272,7 +276,14 @@ function moveNorth() {
   // console.log('north', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
-  pointer(position.x, position.y-=15) 
+
+  console.log(findFromArray(position.y, position.x))
+  if (findFromArray(position.y - 15, position.x) && findFromArray(position.y - 15, position.x).pattern !== 0) {
+    pointer(position.x, position.y -= 15) 
+  } else {
+    console.log('findFromArray pattern', findFromArray(position.y, position.x).pattern)
+  }
+
   
   
   if (position.x == 255 && position.y == 30) {
@@ -286,7 +297,15 @@ function moveEast() {
   // console.log('east', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
-  pointer(position.x+=15, position.y)  
+
+  console.log(findFromArray(position.y, position.x))
+  if (findFromArray(position.y, position.x + 15) && findFromArray(position.y, position.x + 15).pattern !== 0) {
+    pointer(position.x += 15, position.y)  
+  } else {
+    console.log('findFromArray pattern', findFromArray(position.y, position.x).pattern)
+  }
+
+  
   
   
   if (position.x == 255 && position.y == 30) {
@@ -300,7 +319,13 @@ function moveSouth() {
   // console.log('south', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
-  pointer(position.x, position.y+=15)  
+
+  console.log(findFromArray(position.y, position.x))
+  if (findFromArray(position.y + 15, position.x) && findFromArray(position.y + 15, position.x).pattern !== 0) {
+    pointer(position.x, position.y += 15)  
+  } else {
+    console.log('findFromArray pattern', findFromArray(position.y, position.x).pattern)
+  }
 
 
   if (position.x == 255 && position.y == 30) {
