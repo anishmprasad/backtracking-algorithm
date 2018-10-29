@@ -116,23 +116,6 @@ function drawPattern(canvas,n){
   var istep = 15;
   var jstep = 15;
   var o = 0
-  // ctx.strokeRect(0, 0, 10, 20)
-  // ctx.fillText(1,0,0,10,20)
-  // ctx.strokeRect(15, 0, 10, 20)  
-  // ctx.strokeRect(30, 25, 10, 20)    
-  // ctx.fillText(1, 50, 0, 10, 20);
-
-  // ctx.strokeStyle = "#000";
-
-  // ctx.beginPath();
-  // ctx.fillStyle = "#3c0";
-  // ctx.rect(30, 30, 50, 50);
-  // ctx.fill();
-  // ctx.stroke();
-
-  // ctx.fillStyle = "#fff";
-  // ctx.fillText("blah", 0, 30);
-  // ctx.fillText(o += 1, 0, 10, 10, 20);  
   for (var i = 0; i < n.length; i++) {
     for (var j = 0; j < n[i].length; j++) {
       // ctx.strokeRect(i * istep, j * jstep, 10, 20)
@@ -148,7 +131,7 @@ function drawPattern(canvas,n){
       // ctx.strokeRect(0, 0, 10, 20)      
       // console.log(pattern[0].length,pattern.length)
       if(j == n[i].length - 1){
-        // console.log("array")
+        console.log("array")
         continue
       }
 
@@ -176,26 +159,26 @@ function drawPattern(canvas,n){
   // }
 }
 
-function drawBoard(can, nRow, nCol,pattern) {
-  var ctx = can.getContext("2d");
-  var w = can.width;
-  var h = can.height;
+// function drawBoard(can, nRow, nCol,pattern) {
+//   var ctx = can.getContext("2d");
+//   var w = can.width;
+//   var h = can.height;
 
-  nRow = nRow || 8;    // default number of rows
-  nCol = nCol || 8;    // default number of columns
+//   nRow = nRow || 8;    // default number of rows
+//   nCol = nCol || 8;    // default number of columns
 
-  w /= nCol;            // width of a block
-  h /= nRow;            // height of a block
-  console.log(pattern)
-  for (var i = 0,l = 0; i < nRow, l < pattern.length; ++i,l++) {
-    for (var j = 0,m = 0, col = nCol / 2; j < col,m < pattern[i].length; ++j,m++) {
-      // console.log(pattern[i][j])      
-      // ctx.fillRect(2 * j * w + (i % 2 ? 0 : w), i * h, w, h);
-      ctx.fillText(pattern[l][m], j * w , i * h);
-    }
-  }
-  ctx.fill();
-}
+//   w /= nCol;            // width of a block
+//   h /= nRow;            // height of a block
+//   console.log(pattern)
+//   for (var i = 0,l = 0; i < nRow, l < pattern.length; ++i,l++) {
+//     for (var j = 0,m = 0, col = nCol / 2; j < col,m < pattern[i].length; ++j,m++) {
+//       // console.log(pattern[i][j])      
+//       // ctx.fillRect(2 * j * w + (i % 2 ? 0 : w), i * h, w, h);
+//       ctx.fillText(pattern[l][m], j * w , i * h);
+//     }
+//   }
+//   ctx.fill();
+// }
 
 function getObjects(obj, key, val) {
   var objects = [];
@@ -251,41 +234,36 @@ window.addEventListener("keydown", function (e) {
 });
 
 function moveWest() {
-  // console.log('west', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
-  // console.log('position before',position.x, position.y)
+
   console.log(findFromArray(position.y,position.x))
+
   if (findFromArray(position.y, position.x - 15) && findFromArray(position.y, position.x - 15).pattern !== 0){
     pointer(position.x -= 15, position.y)
   }else{
     console.log('findFromArray pattern',findFromArray(position.y, position.x).pattern)
   }
 
-  // console.log(previousPostiton.x,position.x)
-  
   if (position.x == 255 && position.y == 30){
     alert("gotcha")
   }
   console.log('position',position)
-
-
 }
 
 function moveNorth() {
-  // console.log('north', layout)
+
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
 
   console.log(findFromArray(position.y, position.x))
+  
   if (findFromArray(position.y - 15, position.x) && findFromArray(position.y - 15, position.x).pattern !== 0) {
     pointer(position.x, position.y -= 15) 
   } else {
     console.log('findFromArray pattern', findFromArray(position.y, position.x).pattern)
   }
 
-  
-  
   if (position.x == 255 && position.y == 30) {
     alert("gotcha")
   }
@@ -294,20 +272,17 @@ function moveNorth() {
 }
 
 function moveEast() {
-  // console.log('east', layout)
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
 
   console.log(findFromArray(position.y, position.x))
+  
   if (findFromArray(position.y, position.x + 15) && findFromArray(position.y, position.x + 15).pattern !== 0) {
     pointer(position.x += 15, position.y)  
   } else {
     console.log('findFromArray pattern', findFromArray(position.y, position.x).pattern)
   }
 
-  
-  
-  
   if (position.x == 255 && position.y == 30) {
     alert("gotcha")
   }
@@ -316,7 +291,7 @@ function moveEast() {
 }
 
 function moveSouth() {
-  // console.log('south', layout)
+
   previousPostiton["x"] = position.x
   previousPostiton["y"] = position.y
 
@@ -339,7 +314,6 @@ function InitializeGame() {
   initializeCanvas();
   drawPlayer();
   pointer(position.x, position.y)  
-  
 }
 
 window.onload = function () {
