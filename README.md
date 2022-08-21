@@ -1,3 +1,4 @@
 # backtracking-algorithm
 
-coming soon
+# Licence
+MIT
